@@ -6,7 +6,7 @@ import {City} from './city.type';
 export type MockServerDataType = {
   titles: string[];
   descriptions: string[];
-  postDates: string[];
+  postDates: Date[];
   cities: City[];
   previewImages: string[];
   images: string[];

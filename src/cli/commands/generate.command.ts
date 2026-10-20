@@ -1,6 +1,10 @@
 import {ICommand} from './command.interface';
 import axios from 'axios';
-import {MockServerDataType} from "../../shared/types/mock-server-data.type";
+import {MockServerDataType} from '../../shared/types/mock-server-data.type';
+import {createOffer, offerToTSV} from '../../shared/helpers/offer.js';
+import {createWriteStream} from 'node:fs';
+import { pipeline } from 'node:stream/promises';
+import chalk from 'chalk';
 
 export class GenerateCommand implements ICommand {
   async execute(args: string[]): Promise<void> {
@@ -14,24 +18,27 @@ export class GenerateCommand implements ICommand {
     if (!url) {
       throw new Error('You must pass the <url> argument (url stands for server address from where command should get data for offer)');
     }
-    let countNum: number;
-    try {
-      countNum = Number(count);
-    } catch (error) {
-      throw new Error('<n> must be a number');
-    }
+    const countNum = Number(count);
     if (!Number.isSafeInteger(countNum) || countNum <= 0) {
       throw new Error('<n> must be positive');
     }
     const response = await axios.get<MockServerDataType>(url);
     const data = response.data;
-    console.log(data);
-
-
+    await pipeline(
+      generateRows(data, countNum),
+      createWriteStream(filepath, {encoding: 'utf8'})
+    );
+    console.log(chalk.green(`Создано предложений: ${countNum}. Файл: ${filepath}`));
   }
 
   getName(): string {
     return '--generate';
   }
 
+}
+
+function* generateRows(data: MockServerDataType, count: number) {
+  for (let i = 0; i < count; i++) {
+    yield `${offerToTSV(createOffer(data))}\n`;
+  }
 }
