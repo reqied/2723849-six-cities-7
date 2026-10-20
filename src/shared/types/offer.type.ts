@@ -1,8 +1,8 @@
-import {City} from "./city.type";
-import {HousingType} from "./housing-type.type";
-import {AmenitiesType} from "./amenities-type.type";
-import {User} from "./user.type";
-import {Coordinates} from "./coordinates.type";
+import {City} from './city.type';
+import {HousingType} from './housing-type.type';
+import {AmenitiesType} from './amenities-type.type';
+import {User} from './user.type';
+import {Coordinates} from './coordinates.type';
 
 export type Offer = {
   title: string;

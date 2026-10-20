@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import chalk from 'chalk';
 import { CLIApplication } from './cli/cli-application.js';
 import { HelpCommand } from './cli/commands/help.command.js';
