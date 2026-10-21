@@ -1,19 +1,23 @@
 #!/usr/bin/env node
+import { Application } from './application.js';
 import { CLIApplication } from './cli/cli-application.js';
 import { HelpCommand } from './cli/commands/help.command.js';
 import { VersionCommand } from './cli/commands/version.command.js';
 import { ImportCommand } from './cli/commands/import.command.js';
-import {GenerateCommand} from './cli/commands/generate.command.js';
-import {logger} from './shared/logger/logger.js';
+import { GenerateCommand } from './cli/commands/generate.command.js';
+import { logger } from './shared/logger/logger.js';
 
-const application = new CLIApplication();
+const application = new Application();
+application.init();
 
-application.register(new HelpCommand());
-application.register(new VersionCommand());
-application.register(new ImportCommand());
-application.register(new GenerateCommand());
+const cli = new CLIApplication();
 
-application.run(process.argv.slice(2)).catch((error: unknown) => {
+cli.register(new HelpCommand());
+cli.register(new VersionCommand());
+cli.register(new ImportCommand());
+cli.register(new GenerateCommand());
+
+cli.run(process.argv.slice(2)).catch((error: unknown) => {
   logger.error({ err: error }, 'Error while processing');
   process.exitCode = 1;
 });
