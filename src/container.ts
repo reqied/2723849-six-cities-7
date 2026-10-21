@@ -16,6 +16,9 @@ import {IUserService} from './shared/modules/user/user-service.interface.js';
 import {Model} from 'mongoose';
 import {UserEntity, UserModel} from './shared/modules/user/user.model.js';
 import {UserService} from './shared/modules/user/user.service.js';
+import {IOfferService} from './shared/modules/offer/offer-service.interface.js';
+import {OfferEntity, OfferModel} from './shared/modules/offer/offer.model.js';
+import {OfferService} from './shared/modules/offer/offer.service.js';
 
 export const container = new Container();
 container.bind<ILogger>(TYPES.Logger).to(PinoLogger).inSingletonScope();
@@ -30,3 +33,5 @@ container.bind(TSVFileReader).toSelf();
 container.bind<IDatabaseClient>(TYPES.DatabaseClient).to(MongoDatabaseClient).inSingletonScope();
 container.bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
 container.bind<Model<UserEntity>>(TYPES.UserService).toConstantValue(UserModel);
+container.bind<IOfferService>(TYPES.OfferService).to(OfferService).inSingletonScope();
+container.bind<Model<OfferEntity>>(TYPES.OfferModel).toConstantValue(OfferModel);

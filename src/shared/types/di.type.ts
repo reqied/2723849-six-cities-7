@@ -4,4 +4,6 @@ export const TYPES = {
   DatabaseClient: Symbol.for('DatabaseClient'),
   UserModel: Symbol.for('UserModel'),
   UserService: Symbol.for('UserService'),
+  OfferModel: Symbol.for('OfferModel'),
+  OfferService: Symbol.for('OfferService'),
 };

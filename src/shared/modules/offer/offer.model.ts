@@ -1,4 +1,5 @@
 import {model, Schema} from 'mongoose';
+import type { InferSchemaType, HydratedDocument } from 'mongoose';
 
 const offerSchema = new Schema({
   title: String,
@@ -33,4 +34,5 @@ const offerSchema = new Schema({
 });
 
 export const OfferModel = model('Offer', offerSchema);
-
+export type OfferEntity = InferSchemaType<typeof offerSchema>;
+export type OfferDocument = HydratedDocument<OfferEntity>;
