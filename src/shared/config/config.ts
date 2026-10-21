@@ -29,3 +29,4 @@ export const config = convict({
   }
 });
 
+export type AppConfig = typeof config;

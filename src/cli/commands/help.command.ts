@@ -1,6 +1,8 @@
 import chalk from 'chalk';
-import {ICommand} from './command.interface';
+import {ICommand} from './command.interface.js';
+import {injectable} from 'inversify';
 
+@injectable()
 export class HelpCommand implements ICommand {
   execute(_args: string[]): void {
     console.info(`
