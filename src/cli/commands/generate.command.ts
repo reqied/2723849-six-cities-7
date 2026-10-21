@@ -29,7 +29,7 @@ export class GenerateCommand implements ICommand {
       generateRows(data, countNum),
       createWriteStream(filepath, {encoding: 'utf8'})
     );
-    console.log(chalk.green(`Создано предложений: ${countNum}. Файл: ${filepath}`));
+    console.log(chalk.green(`Generated ${countNum} offers to ${filepath}`));
     logger.info(
       {count: countNum, filepath: filepath},
       'Generated successfully',

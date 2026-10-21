@@ -17,12 +17,12 @@ export class ImportCommand implements ICommand {
 
     for await (const fields of reader.read(filename)) {
       if (fields.length !== 21) {
-        throw new Error(`Некорректное количество полей в строке ${count + 1}`);
+        throw new Error(`Incorrect count of fields: ${count + 1}, but 21 requires`);
       }
       count++;
     }
 
-    console.log(chalk.green(`Прочитано предложений: ${count}`));
+    console.log(chalk.green(`Imported ${count} offers`));
     logger.info(
       {count, filename},
       'Imported successfully',
