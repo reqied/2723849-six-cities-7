@@ -12,6 +12,10 @@ import {VersionCommand} from './cli/commands/version.command.js';
 import {TSVFileReader} from './shared/file-reader/tsv-file-reader.js';
 import {IDatabaseClient} from './shared/database-client/database-client.interface.js';
 import {MongoDatabaseClient} from './shared/database-client/mongo-database-client.js';
+import {IUserService} from './shared/modules/user/user-service.interface.js';
+import {Model} from 'mongoose';
+import {UserEntity, UserModel} from './shared/modules/user/user.model.js';
+import {UserService} from './shared/modules/user/user.service.js';
 
 export const container = new Container();
 container.bind<ILogger>(TYPES.Logger).to(PinoLogger).inSingletonScope();
@@ -24,3 +28,5 @@ container.bind(HelpCommand).toSelf();
 container.bind(VersionCommand).toSelf();
 container.bind(TSVFileReader).toSelf();
 container.bind<IDatabaseClient>(TYPES.DatabaseClient).to(MongoDatabaseClient).inSingletonScope();
+container.bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
+container.bind<Model<UserEntity>>(TYPES.UserService).toConstantValue(UserModel);
