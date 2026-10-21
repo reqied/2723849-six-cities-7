@@ -5,6 +5,7 @@ import {createOffer, offerToTSV} from '../../shared/helpers/offer.js';
 import {createWriteStream} from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 import chalk from 'chalk';
+import {logger} from '../../shared/logger/logger.js';
 
 export class GenerateCommand implements ICommand {
   async execute(args: string[]): Promise<void> {
@@ -29,6 +30,10 @@ export class GenerateCommand implements ICommand {
       createWriteStream(filepath, {encoding: 'utf8'})
     );
     console.log(chalk.green(`Создано предложений: ${countNum}. Файл: ${filepath}`));
+    logger.info(
+      {count: countNum, filepath: filepath},
+      'Generated successfully',
+    );
   }
 
   getName(): string {

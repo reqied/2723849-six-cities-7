@@ -1,6 +1,7 @@
 import {ICommand} from './command.interface';
 import chalk from 'chalk';
 import {TSVFileReader} from '../../shared/file-reader/tsv-file-reader.js';
+import {logger} from '../../shared/logger/logger.js';
 
 export class ImportCommand implements ICommand {
   async execute(args: string[]): Promise<void> {
@@ -22,6 +23,10 @@ export class ImportCommand implements ICommand {
     }
 
     console.log(chalk.green(`Прочитано предложений: ${count}`));
+    logger.info(
+      {count, filename},
+      'Imported successfully',
+    );
   }
 
   getName(): string {
