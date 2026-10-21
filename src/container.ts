@@ -10,6 +10,8 @@ import {CLIApplication} from './cli/cli-application.js';
 import {HelpCommand} from './cli/commands/help.command.js';
 import {VersionCommand} from './cli/commands/version.command.js';
 import {TSVFileReader} from './shared/file-reader/tsv-file-reader.js';
+import {IDatabaseClient} from './shared/database-client/database-client.interface.js';
+import {MongoDatabaseClient} from './shared/database-client/mongo-database-client.js';
 
 export const container = new Container();
 container.bind<ILogger>(TYPES.Logger).to(PinoLogger).inSingletonScope();
@@ -21,3 +23,4 @@ container.bind(CLIApplication).toSelf();
 container.bind(HelpCommand).toSelf();
 container.bind(VersionCommand).toSelf();
 container.bind(TSVFileReader).toSelf();
+container.bind<IDatabaseClient>(TYPES.DatabaseClient).to(MongoDatabaseClient).inSingletonScope();

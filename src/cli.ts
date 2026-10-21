@@ -20,8 +20,12 @@ cli.register(container.get(HelpCommand));
 cli.register(container.get(VersionCommand));
 
 async function main(): Promise<void> {
-  application.init();
-  await cli.run(process.argv.slice(2));
+  await application.init();
+  try {
+    await cli.run(process.argv.slice(2));
+  } finally {
+    await application.close();
+  }
 }
 
 main().catch((error: unknown) => {
