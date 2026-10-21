@@ -11,5 +11,5 @@ export type CreateUserData = {
 export interface IUserService {
   findById(id: string): Promise<UserDocument | null>;
   findByEmail(email: string): Promise<UserDocument | null>;
-  create(user: CreateUserData): Promise<UserDocument | null>;
+  create(user: CreateUserData): Promise<UserDocument>;
 }

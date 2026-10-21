@@ -32,6 +32,6 @@ container.bind(VersionCommand).toSelf();
 container.bind(TSVFileReader).toSelf();
 container.bind<IDatabaseClient>(TYPES.DatabaseClient).to(MongoDatabaseClient).inSingletonScope();
 container.bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
-container.bind<Model<UserEntity>>(TYPES.UserService).toConstantValue(UserModel);
+container.bind<Model<UserEntity>>(TYPES.UserModel).toConstantValue(UserModel);
 container.bind<IOfferService>(TYPES.OfferService).to(OfferService).inSingletonScope();
 container.bind<Model<OfferEntity>>(TYPES.OfferModel).toConstantValue(OfferModel);

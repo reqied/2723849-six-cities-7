@@ -1,4 +1,4 @@
 export interface IDatabaseClient {
-  connect(): Promise<void>;
+  connect(uri?: string): Promise<void>;
   disconnect(): Promise<void>;
 }

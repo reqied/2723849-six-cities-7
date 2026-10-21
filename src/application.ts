@@ -11,9 +11,9 @@ export class Application {
     @inject(TYPES.Config) private readonly config: AppConfig,
     @inject(TYPES.DatabaseClient) private readonly databaseClient: IDatabaseClient,) {}
 
-  public async init(): Promise<void> {
+  public async init(uri?: string): Promise<void> {
     this.config.validate({ allowed: 'strict' });
-    await this.databaseClient.connect();
+    await this.databaseClient.connect(uri);
     this.logger.info('Application initialized');
     this.logger.info('Application port', { port: this.config.get('port') });
   }

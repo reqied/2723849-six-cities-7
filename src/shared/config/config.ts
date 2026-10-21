@@ -40,7 +40,7 @@ export const config = convict({
         throw new Error('SALT must be a non-empty string');
       }
     },
-    default: null,
+    default: '',
     nullable: false
   }
 });
