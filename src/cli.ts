@@ -8,8 +8,6 @@ import { GenerateCommand } from './cli/commands/generate.command.js';
 import { logger } from './shared/logger/logger.js';
 
 const application = new Application();
-application.init();
-
 const cli = new CLIApplication();
 
 cli.register(new HelpCommand());
@@ -17,7 +15,12 @@ cli.register(new VersionCommand());
 cli.register(new ImportCommand());
 cli.register(new GenerateCommand());
 
-cli.run(process.argv.slice(2)).catch((error: unknown) => {
-  logger.error({ err: error }, 'Error while processing');
+async function main(): Promise<void> {
+  application.init();
+  await cli.run(process.argv.slice(2));
+}
+
+main().catch((error: unknown) => {
+  logger.error({ err: error }, 'Application failed');
   process.exitCode = 1;
 });
